@@ -6,7 +6,7 @@ class Student:
     
     
     def full_name(self):
-        return f"Hello {self.name}"
+        return f"Hello {self.name}, your welcome to {self.school}"
 
     def greeting(self):
         return f"Hello {self.name} your were born in {self.year_of_birth}"
