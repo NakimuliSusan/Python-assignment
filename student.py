@@ -9,7 +9,8 @@ class Student:
         return f"Hello {self.name}, your welcome to {self.school}"
 
     def greeting(self):
-        return f"Hello {self.name} your were born in {self.year_of_birth}"
+        age = 2022 - self.year_of_birth 
+        return f"Hello {self.name} your were born in {self.year_of_birth} and your age is {age}"
 
     def get_intials(self):
         intials = ""
@@ -18,7 +19,7 @@ class Student:
            intials += name[0]. upper() 
         return intials
 
-    
+    #class Student
     # def full_Name(self):
     #     first_Name = int(input("Enter first name:"))
     #     second_Name = int(input("Enter second name:"))
