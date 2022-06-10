@@ -1,23 +1,21 @@
 class Student:
     school = "AkiraChix" 
-    def __init__(self,name,year_of_birth):
-        self.name = name
-        self.year_of_birth = year_of_birth
+    def __init__(self,first_name,last_name,age):
+        self.first_name = first_name
+        self.last_name = last_name
+        self.age = age
     
     
     def full_name(self):
-        return f"Hello {self.name}, your welcome to {self.school}"
+        return f"Hello {self.first_name}{self.last_name}"
 
-    def greeting(self):
-        age = 2022 - self.year_of_birth 
-        return f"Hello {self.name} your were born in {self.year_of_birth} and your age is {age}"
+    def year_of_birth(self):
+        year = 2022 -self.age
+        return f"Hello {self.full_name} your were born in {year} and your age is {self.age}"
 
     def get_intials(self):
-        intials = ""
-        full_name = self.name.split()
-        for name in full_name: 
-           intials += name[0]. upper() 
-        return intials
+        intial = self.first_name[0] + self.last_name[0]
+        return intial.upper()
 
     #class Student
     # def full_Name(self):

@@ -13,3 +13,6 @@ def sum_and_greet (*args , **kwargs):
 # sum_and_greet(10,20,30,40, name="Effence", country = "Kenya")
 # sum_and_greet(name = "Verite")
 # sum_and_greet(100,1000,10000)
+
+
+
