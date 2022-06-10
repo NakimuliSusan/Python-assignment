@@ -27,11 +27,11 @@ class Account:
             return f"your account balance is low "
         else:
            self.balance -= amount
-           actual_balance = self.balance - self.transaction_charge
-           self.withdraws.append(amount)
-        #    self.withdraws.append(self.balance)
+           self.balance -= self.transaction_charge
+           withdraw_details = f"You withdrew KSHS{amount}, and your new account balance was{self.balance}"
+           self.withdraws.append(withdraw_details)
            print(self.withdraws)
-           return f"Hello {self.account_name} you have withdrawn {amount} and your balance is {actual_balance}"
+           return f"Hello {self.account_name} you have withdrawn {amount} and your balance is {self.balance}"
 
     def deposits_statement (self):
         for deposits in self.deposits:
@@ -39,8 +39,8 @@ class Account:
 
     def withdraw_statement (self):
         for withdraw in self.withdraws:
-            print(f"You withdrew KES{withdraw} and your balance is {self.balance- self.transaction_charge} with a charge {self.transaction_charge}.")
+            print(withdraw)
 
     def get_balance (self) :
-        return f"Your account balance is {self.balance- self.transaction_charge}"
+        return f"Your account balance is {self.balance}"
             
