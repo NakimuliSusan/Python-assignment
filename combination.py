@@ -6,7 +6,7 @@ def sum_and_greet (*args , **kwargs):
     if "name" in keys :
         print(f"Hello {kwargs['name']} the answer is {sum}")
     elif "country" & "name"  in keys :
-        print(f"Hello  {kwargs['country']}, the answer is {sum}.")
+        print(f"Hello  ,{kwargs['name']} {kwargs['country']}, the answer is {sum}.")
     elif not kwargs:
         print(f"Hello Annonymus the answer is {sum}.")
 # sum_and_greet(1,2,3,4, name = "Susan")

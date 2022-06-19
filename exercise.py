@@ -6,7 +6,3 @@ while x <= y:
         continue
     print(x)
 
-w = 10
-z = 20
- while w <= z:
-     
