@@ -62,6 +62,7 @@ class Account:
 
     def full_statement (self) :
         for item in self.combination :
+            self.combination.sort(key=lambda item: item['date'], reverse=True)
             date = item['date']
             amount = item['amount']
             narration = item['narration']
@@ -74,7 +75,7 @@ class Account:
         if amount <= 100:
             return f"Enter amount more than 100"
         elif self.loan_balance > 0:
-            return f"You have an outstanding amount of {amount}"
+            return f"You have an outstanding amount of {self.loan_balance}"
         elif amount >= qualification:
             return f"You cannot borrow more than {count//3}"
         elif len(self.deposits)< 10:
