@@ -89,10 +89,16 @@ class Account:
             self.loan_balance -= amount
             return f"You have paid {amount} and your have an outstanding balance of {self.loan_balance}"
 
+        elif amount == self.loan_balance:
+              self.loan_balance-= amount
+
+        elif amount > self.loan_balance:   
+              overpay = amount - self.loan_balance
+              self.balance+=overpay
+              remaining_amount = amount - overpay
+              self.loan_balance -= remaining_amount
         else:
             self.loan_balance-=amount
-            overpay = amount - self.loan_balance
-            self.balance+=overpay
             return f"You loan has been fully settled."
     def transfer(self, amount, account):
         if amount > self.balance:
