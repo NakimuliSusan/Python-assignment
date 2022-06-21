@@ -41,7 +41,7 @@ class Account:
            self.balance -= amount
            self.balance -= self.transaction_charge
            withdraws = {"date": date.strftime('%Y/%m/%d %H:%M'), "amount": amount, "narration": f"Withdraw"}
-           withdraw_details = f"You withdrew KSHS{amount}, and your new account balance was {self.balance}"
+           withdraw_details = f"You withdrew KSHS{ amount}, and your new account balance was {self.balance}"
            self.withdraws.append(withdraws)
            self.combination.append(withdraws)
            print(withdraw_details)
@@ -91,6 +91,8 @@ class Account:
 
         elif amount == self.loan_balance:
               self.loan_balance-= amount
+        elif self.loan_balance == 0:
+            return f"You have no loan balance, you can borrow"
 
         elif amount > self.loan_balance:   
               overpay = amount - self.loan_balance
@@ -108,22 +110,7 @@ class Account:
         else:
             self.balance-= amount
             account.balance += amount
+            print(account.balance)
             return f"You have sent {amount} to {account.account_name} and your balance is {self.balance}"
 
-       
-        
-
-       
-
-
-       
-
-          
-
-
-            
-
-
-
-        
-            
+    
