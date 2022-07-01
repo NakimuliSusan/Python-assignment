@@ -7,7 +7,7 @@ class Account:
         self.balance = 0
         self.withdraws = []
         self.deposits = []
-        self.combination = []
+        # self.combination = []
         self.transaction_charge = 100
         self.loan_balance = 0
       
@@ -19,10 +19,10 @@ class Account:
         else:
           date = datetime.now()
           self.balance += amount
-          self.deposits.append(amount)
+        #   self.deposits.append(amount)
           details = {"date": date.strftime('%Y/%m/%d %H:%M'), "amount": amount, "narration": f"Deposit"}
-        #   self.deposits.append(details) 
-          self.combination.append(details)
+          self.deposits.append(details) 
+        #   self.combination.append(details)
         #   print(self.deposits)
           return f"Hello {self.account_name} you have deposited {amount} and your balance is {self.balance}"
 
@@ -40,14 +40,14 @@ class Account:
    
            self.balance -= amount
            self.balance -= self.transaction_charge
-           withdraws = {"date": date.strftime('%Y/%m/%d %H:%M'), "amount": amount, "narration": f"Withdraw"}
+           withdraws = {"date": date.strftime('%d%Y/%m/ %H:%M'), "amount": amount, "narration": f"Withdraw"}
            withdraw_details = f"You withdrew KSHS{ amount}, and your new account balance was {self.balance}"
            self.withdraws.append(withdraws)
-           self.combination.append(withdraws)
+        #    self.combination.append(withdraws)
            print(withdraw_details)
         #    print(self.withdraws)
         #    print(self.combination)
-        #    return f"Hello {self.account_name} you have withdrawn {amount} and your balance is {self.balance}"
+           return f"Hello {self.account_name} you have withdrawn {amount} and your balance is {self.balance}"
 
     def deposits_statement (self):
         for deposits in self.deposits:
@@ -61,27 +61,30 @@ class Account:
         return f"Your account balance is {self.balance}"
 
     def full_statement (self) :
-        for item in self.combination :
-            self.combination.sort(key=lambda item: item['date'], reverse=True)
+        joined = self.deposits + self.withdraws
+        sorted(joined,key=lambda item: item['date'], reverse=True) 
+        for item in joined :
             date = item['date']
             amount = item['amount']
             narration = item['narration']
-            print(f"{date}----------- {narration}----------- {amount}")
+            print(f"{date} ----------- {narration} ----------- {amount}")
 
     def borrow(self,amount):
-        count = sum(self.deposits)
-        qualification = (count) * 1/3
-        amount += (amount)* 0.03
+        # count = sum(self.deposits)
+        total = sum([amount['amount'] for amount in self.deposits])
+        qualification = (total) * 1/3
         if amount <= 100:
             return f"Enter amount more than 100"
         elif self.loan_balance > 0:
             return f"You have an outstanding amount of {self.loan_balance}"
         elif amount >= qualification:
-            return f"You cannot borrow more than {count//3}"
+            return f"You cannot borrow more than {total//3}"
         elif len(self.deposits)< 10:
             return f"You must have deposited more than 10 times "
         else:
+            amount += (amount)* 0.03
             self.loan_balance += amount
+            self.balance += amount
             return f"Your loan balance is {self.loan_balance}"
 
     def loan_repayment(self, amount):
@@ -91,25 +94,24 @@ class Account:
 
         elif amount == self.loan_balance:
               self.loan_balance-= amount
+              return f"You have paid {amount} and your have an outstanding balance of {self.loan_balance}"
         elif self.loan_balance == 0:
             return f"You have no loan balance, you can borrow"
 
-        elif amount > self.loan_balance:   
+        else:   
               overpay = amount - self.loan_balance
               self.balance+=overpay
-              remaining_amount = amount - overpay
-              self.loan_balance -= remaining_amount
-        else:
-            self.loan_balance-=amount
-            return f"You loan has been fully settled."
+            #   self.balance += amount
+              self.loan_balance = 0
+              return f"You loan has been fully settled."
     def transfer(self, amount, account):
-        if amount > self.balance:
+        if amount >= self.balance:
             return f"Your account balance is too low cannot transfer amount"
         elif amount <= 0:
             return f"Enter correct amount" 
-        else:
+        elif isinstance(account,Account):
             self.balance-= amount
-            account.balance += amount
+            account.deposit(amount)
             print(account.balance)
             return f"You have sent {amount} to {account.account_name} and your balance is {self.balance}"
 
